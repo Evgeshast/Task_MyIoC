@@ -60,7 +60,7 @@ namespace MyIoC
 
 		public object CreateInstance(Type type)
         {
-            ConstructorInfo [] constructors = typeof(Type).GetConstructors();
+            ConstructorInfo [] constructors = type.GetConstructors();
             List<Type> constructorParameters = null;
             if (constructors.Length != 0)
             {

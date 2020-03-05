@@ -1,6 +1,6 @@
-﻿namespace IoCSample
+﻿namespace IoCSample.Classes
 {
-	//public class CustomerBLL
-	//{
-	//}
+	public class CustomerBLL
+	{
+	}
 }
