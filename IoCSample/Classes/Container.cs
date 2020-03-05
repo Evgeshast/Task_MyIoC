@@ -19,7 +19,6 @@ namespace MyIoC
 
         public Container()
         {
-            Initialize();
         }
 
         private void Initialize()
@@ -90,6 +89,7 @@ namespace MyIoC
 
 		public T CreateInstance<T>()
 		{
+            Initialize();
             ConstructorInfo[] constructors = typeof(T).GetConstructors();
             var constructorParameters = new List<Type>();
             foreach (var param in constructors[0].GetParameters())
