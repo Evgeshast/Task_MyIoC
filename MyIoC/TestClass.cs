@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MyIoC
 {
     [TestClass]
-    class TestClass
+    public class TestClass
     {
         [TestMethod]
         public void Sample()
