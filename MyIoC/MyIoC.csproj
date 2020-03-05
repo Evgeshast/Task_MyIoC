@@ -50,12 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Container.cs" />
-    <Compile Include="ICustomerDAL.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="ImportAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IoCSample\IoCSample.csproj">
+      <Project>{92498ca6-bfda-4d0b-bac1-d204873d0122}</Project>
+      <Name>IoCSample</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
