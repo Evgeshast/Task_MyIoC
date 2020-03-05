@@ -60,29 +60,54 @@ namespace MyIoC
 		public object CreateInstance(Type type)
         {
             ConstructorInfo [] constructors = typeof(Type).GetConstructors();
-            var constructorParameters = new List<Type>();
-            foreach (var param in constructors[0].GetParameters())
+            List<Type> constructorParameters = null;
+            if (constructors.Length != 0)
             {
-                var parameterType = typesList.FirstOrDefault(x => x == param.ParameterType);
-                if(parameterType == null)
+                foreach (var param in constructors[0].GetParameters())
                 {
-                    if (typesDictionary.ContainsKey(parameterType))
+                    constructorParameters = new List<Type>();
+                    var parameterType = typesList.FirstOrDefault(x => x == param.ParameterType);
+                    if (parameterType == null)
                     {
+
                         parameterType = typesDictionary[param.ParameterType];
+
                     }
-                    else
-                    {
-                        throw new NotImplementedException();
-                    }
+                    constructorParameters.Add(parameterType);
                 }
-                constructorParameters.Add(parameterType);
             }
-            return Activator.CreateInstance(type, constructorParameters);
+            if (constructorParameters == null)
+            {
+                return Activator.CreateInstance(type);
+            }
+            else 
+            {
+                return Activator.CreateInstance(type, args: constructorParameters);
+            }
 		}
 
 		public T CreateInstance<T>()
 		{
-			return Activator.CreateInstance<T>();
-		}
+            ConstructorInfo[] constructors = typeof(T).GetConstructors();
+            var constructorParameters = new List<Type>();
+            foreach (var param in constructors[0].GetParameters())
+            {
+                var parameterType = typesList.FirstOrDefault(x => x == param.ParameterType);
+                if (parameterType == null)
+                {
+                    parameterType = typesDictionary[param.ParameterType];
+                }
+                constructorParameters.Add(parameterType);
+            }
+
+            if (constructorParameters == null)
+            {
+                return (T)Activator.CreateInstance(typeof(T));
+            }
+            else
+            {
+                return (T)Activator.CreateInstance(typeof(T), args: constructorParameters); ;
+            }
+        }
 	}
 }

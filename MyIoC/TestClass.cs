@@ -15,7 +15,7 @@ namespace MyIoC
         public void Sample()
         {
             var container = new Container();
-            container.AddAssembly(Assembly.GetExecutingAssembly());
+            container.AddAssembly(Assembly.LoadFrom("IoCSample.dll"));
             container.AddType(typeof(CustomerBLL));
             container.AddType(typeof(Logger));
             container.AddType(typeof(CustomerDAL), typeof(ICustomerDAL));
