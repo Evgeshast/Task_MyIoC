@@ -1,4 +1,5 @@
-﻿namespace MyIoC
+﻿
+namespace IoCSample
 {
 	[Export]
 	public class Logger

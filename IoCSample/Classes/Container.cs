@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using IoCSample;
 
 namespace MyIoC
 {
@@ -18,19 +19,20 @@ namespace MyIoC
 
         public Container()
         {
+            Initialize();
         }
 
         private void Initialize()
         {
             typesList.AddRange(GetTypesWith<ImportAttribute>(false));
             typesList.AddRange(GetTypesWith<ImportConstructorAttribute>(false));
-            foreach (var type in GetTypesWith<ExportAttribute>(false))
+            foreach (var type in GetTypesWith<ExportAttribute>(false).Where(x => x.BaseType != typeof(object)))
             {
                 typesDictionary.Add(type.BaseType, type);
             }
         }
 
-        IEnumerable<Type> GetTypesWith<Attribute>(bool inherit)
+        private IEnumerable<Type> GetTypesWith<Attribute>(bool inherit)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes(), (a, t) => new { a, t })

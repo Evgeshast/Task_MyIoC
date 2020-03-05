@@ -1,4 +1,6 @@
-﻿namespace MyIoC
+﻿
+
+namespace IoCSample
 {
 	public interface ICustomerDAL
 	{
